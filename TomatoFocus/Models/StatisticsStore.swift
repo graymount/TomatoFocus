@@ -109,6 +109,17 @@ class StatisticsStore: ObservableObject {
         return dateFormatter.string(from: Date())
     }
     
+    /// 刷新统计数据（用于下拉刷新）
+    func refreshStats() {
+        // 重新加载UserDefaults中的数据
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.totalPomodoroCount = self.userDefaults.integer(forKey: self.pomodoroCountKey)
+            self.totalFocusTimeInMinutes = self.userDefaults.integer(forKey: self.totalFocusTimeKey)
+            self.loadDailyStats()
+        }
+    }
+    
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TomatoFocus - 用户支持</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #FF6B35;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #4A90E2;
+            border-bottom: 2px solid #4A90E2;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .contact-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .faq-item {
+            margin: 20px 0;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .faq-question {
+            background: #f8f9fa;
+            padding: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+        .faq-answer {
+            padding: 15px;
+            display: none;
+            border-top: 1px solid #e9ecef;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .emoji {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .version-info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .download-links {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .app-store-button {
+            display: inline-block;
+            margin: 10px;
+        }
+        .app-store-button img {
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍅 TomatoFocus</h1>
+        <p style="text-align: center; font-size: 1.2em; color: #666;">
+            专业的番茄工作法应用，助您提升专注力与效率
+        </p>
+
+        <div class="download-links">
+            <a href="https://apps.apple.com/app/id6502516227" class="app-store-button">
+                <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store">
+            </a>
+        </div>
+
+        <h2>📞 联系我们</h2>
+        <div class="contact-info">
+            <p><strong>📧 邮箱支持:</strong> liuwenfeng1994@gmail.com</p>
+            <p><strong>⏰ 回复时间:</strong> 通常在24小时内回复</p>
+            <p><strong>🌐 开发者:</strong> LiuWenfeng</p>
+            <p><strong>📱 App版本:</strong> 1.0</p>
+        </div>
+
+        <h2>✨ 应用特色</h2>
+        <div class="feature-list">
+            <div class="feature-card">
+                <div class="emoji">🍅</div>
+                <h3>番茄工作法</h3>
+                <p>经典的25分钟专注 + 5分钟休息循环</p>
+            </div>
+            <div class="feature-card">
+                <div class="emoji">🎨</div>
+                <h3>多种主题</h3>
+                <p>6种精美主题：森林、海洋、咖啡厅等</p>
+            </div>
+            <div class="feature-card">
+                <div class="emoji">📊</div>
+                <h3>数据统计</h3>
+                <p>详细的专注时间统计和成就系统</p>
+            </div>
+            <div class="feature-card">
+                <div class="emoji">🎵</div>
+                <h3>环境音效</h3>
+                <p>多种白噪音和自然音效助您专注</p>
+            </div>
+        </div>
+
+        <h2>❓ 常见问题</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                如何设置自定义时间？
+            </div>
+            <div class="faq-answer">
+                <p>1. 在主界面点击"预设"按钮</p>
+                <p>2. 选择"专注预设"或"休息预设"中的选项</p>
+                <p>3. 或者使用快捷按钮（+5分钟、+10分钟、-5分钟）调整时间</p>
+                <p>4. 也可以点击时钟图标选择不同模式</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                如何切换主题？
+            </div>
+            <div class="faq-answer">
+                <p>1. 在主界面右上角点击"主题"按钮</p>
+                <p>2. 每次点击都会切换到下一个主题</p>
+                <p>3. 包含森林、海洋、咖啡厅、极简、Lofi、科技六种主题</p>
+                <p>4. 主题会影响界面颜色和背景音效</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                背景音效如何使用？
+            </div>
+            <div class="faq-answer">
+                <p>1. 在界面底部找到音效控制面板</p>
+                <p>2. 点击音效名称选择不同的背景声音</p>
+                <p>3. 使用播放/暂停按钮控制音效</p>
+                <p>4. 拖动音量滑块调整音量大小</p>
+                <p>5. 包含森林、雨声、咖啡厅等多种环境音效</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                专注模式有什么用？
+            </div>
+            <div class="faq-answer">
+                <p>1. 点击右上角的"专注"按钮进入沉浸模式</p>
+                <p>2. 在此模式下界面更简洁，减少干扰</p>
+                <p>3. 只显示计时器和基本控制按钮</p>
+                <p>4. 适合需要高度专注的工作时段</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                统计数据在哪里查看？
+            </div>
+            <div class="faq-answer">
+                <p>1. 点击底部标签栏的"统计"选项</p>
+                <p>2. 查看今日、本周、本月的专注时间</p>
+                <p>3. 查看专注天数和平均专注时长</p>
+                <p>4. 查看不同模式（专注、短休息、长休息）的使用情况</p>
+            </div>
+        </div>
+
+        <h2>🐛 问题反馈</h2>
+        <div class="contact-info">
+            <p>如果您遇到任何问题或有功能建议，请通过以下方式联系我们：</p>
+            <ul>
+                <li><strong>Bug报告:</strong> liuwenfeng1994@gmail.com</li>
+                <li><strong>功能建议:</strong> liuwenfeng1994@gmail.com</li>
+                <li><strong>使用问题:</strong> liuwenfeng1994@gmail.com</li>
+            </ul>
+            <p>请在邮件中详细描述问题，并提供设备型号和iOS版本信息。</p>
+        </div>
+
+        <h2>🔄 版本信息</h2>
+        <div class="version-info">
+            <p><strong>当前版本:</strong> 1.0</p>
+            <p><strong>支持系统:</strong> iOS 17.0 及以上版本</p>
+            <p><strong>支持设备:</strong> iPhone、iPad</p>
+            <p><strong>更新日期:</strong> 2025年1月</p>
+        </div>
+
+        <h2>🏷️ 使用技巧</h2>
+        <ul>
+            <li><strong>经典番茄工作法:</strong> 使用25分钟专注 + 5分钟短休息</li>
+            <li><strong>学习模式:</strong> 使用50分钟专注 + 15分钟长休息</li>
+            <li><strong>快速任务:</strong> 使用15分钟快速冲刺模式</li>
+            <li><strong>午休模式:</strong> 使用30分钟午休设置</li>
+            <li><strong>环境音效:</strong> 根据当前环境选择合适的背景音</li>
+            <li><strong>主题选择:</strong> 根据时间和心情选择不同主题</li>
+        </ul>
+
+        <hr style="margin: 40px 0; border: none; height: 1px; background: #e9ecef;">
+        
+        <p style="text-align: center; color: #666; font-size: 0.9em;">
+            © 2025 TomatoFocus. 保留所有权利.<br>
+            Made with ❤️ for productivity enthusiasts
+        </p>
+    </div>
+
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html> 

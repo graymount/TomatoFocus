@@ -4,6 +4,11 @@ struct OnboardingView: View {
     @Binding var isShowingOnboarding: Bool
     @State private var currentPage = 0
     
+    // Device detection for iPad
+    private var isIPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         TabView(selection: $currentPage) {
             onboardingPage(
@@ -38,18 +43,18 @@ struct OnboardingView: View {
             )
             .tag(3)
             
-            VStack(spacing: 30) {
+            VStack(spacing: isIPad ? 40 : 30) {
                 Text("准备好提升专注力了吗？")
-                    .font(.largeTitle)
+                    .font(isIPad ? .largeTitle : .largeTitle)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
                 
                 Image(systemName: "checkmark.circle")
-                    .font(.system(size: 100))
+                    .font(.system(size: isIPad ? 120 : 100))
                     .foregroundColor(.white)
                 
                 Text("立即开始专注和提高效率")
-                    .font(.title2)
+                    .font(isIPad ? .title : .title2)
                     .multilineTextAlignment(.center)
                 
                 Button(action: {
@@ -64,13 +69,13 @@ struct OnboardingView: View {
                     Text("开始使用")
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .padding()
-                        .padding(.horizontal, 30)
+                        .padding(isIPad ? 20 : 15)
+                        .padding(.horizontal, isIPad ? 40 : 30)
                         .background(Color.red)
-                        .cornerRadius(30)
+                        .cornerRadius(isIPad ? 35 : 30)
                         .shadow(radius: 10)
                 }
-                .padding(.top, 30)
+                .padding(.top, isIPad ? 40 : 30)
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -126,34 +131,34 @@ struct OnboardingView: View {
                     }
                 }
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20),
+            .padding(.horizontal, isIPad ? 30 : 20)
+            .padding(.bottom, isIPad ? 30 : 20),
             alignment: .bottom
         )
     }
     
     private func onboardingPage(title: String, description: String, imageName: String, backgroundColor: Color) -> some View {
-        VStack(spacing: 30) {
+        VStack(spacing: isIPad ? 40 : 30) {
             Spacer()
             
             Text(title)
-                .font(.largeTitle)
+                .font(isIPad ? .largeTitle : .largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal)
+                .padding(.horizontal, isIPad ? 30 : 20)
                 .shadow(color: .black.opacity(0.3), radius: 2, x: 1, y: 1)
             
             Image(systemName: imageName)
-                .font(.system(size: 120))
+                .font(.system(size: isIPad ? 140 : 120))
                 .foregroundColor(.white)
                 .shadow(color: .black.opacity(0.3), radius: 10)
             
             Text(description)
-                .font(.title2)
+                .font(isIPad ? .title : .title2)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 30)
+                .padding(.horizontal, isIPad ? 40 : 30)
                 .shadow(color: .black.opacity(0.3), radius: 1, x: 0.5, y: 0.5)
             
             Spacer()

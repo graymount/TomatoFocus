@@ -11,7 +11,13 @@ class TimerModel: ObservableObject {
     private var initialTime: Int
     private var timer = Timer()
     
+    // Settings for each mode that will be updated by ConfigurationModel
+    private var focusTime = 25
+    private var shortBreakTime = 5
+    private var longBreakTime = 15
+    
     init(minutes: Int = 25) {
+        self.focusTime = minutes
         self.initialTime = minutes * 60
         self.timeRemaining = initialTime
     }
@@ -67,14 +73,14 @@ class TimerModel: ObservableObject {
         case .focus:
             if completedPomodoros % 4 == 0 {
                 mode = .longBreak
-                setTime(minutes: 15)
+                setTime(minutes: longBreakTime)
             } else {
                 mode = .shortBreak
-                setTime(minutes: 5)
+                setTime(minutes: shortBreakTime)
             }
         case .shortBreak, .longBreak:
             mode = .focus
-            setTime(minutes: 25)
+            setTime(minutes: focusTime)
         }
         
         // Send notification
@@ -87,7 +93,67 @@ class TimerModel: ObservableObject {
     }
     
     func setCustomTime(minutes: Int) {
+        // Update the appropriate time setting based on current mode
+        switch mode {
+        case .focus:
+            focusTime = minutes
+        case .shortBreak:
+            shortBreakTime = minutes
+        case .longBreak:
+            longBreakTime = minutes
+        }
+        
         setTime(minutes: minutes)
+    }
+    
+    // MARK: - New Quick Action Methods
+    
+    /// Add minutes to current timer (only when not active or paused)
+    func addMinutes(_ minutes: Int) {
+        guard !isActive || isPaused else { return }
+        
+        let additionalSeconds = minutes * 60
+        timeRemaining += additionalSeconds
+        initialTime += additionalSeconds
+    }
+    
+    /// Set custom duration in seconds
+    func setCustomDuration(_ seconds: Int) {
+        guard !isActive || isPaused else { return }
+        
+        initialTime = seconds
+        timeRemaining = seconds
+    }
+    
+    /// Reset to default time for current mode
+    func resetToDefault() {
+        guard !isActive || isPaused else { return }
+        
+        switch mode {
+        case .focus:
+            setTime(minutes: 25) // Default focus time
+        case .shortBreak:
+            setTime(minutes: 5)  // Default short break
+        case .longBreak:
+            setTime(minutes: 15) // Default long break
+        }
+    }
+    
+    // Update all time settings at once (used by ConfigurationModel)
+    func updateTimeSettings(focusTime: Int, shortBreakTime: Int, longBreakTime: Int) {
+        self.focusTime = focusTime
+        self.shortBreakTime = shortBreakTime
+        self.longBreakTime = longBreakTime
+        
+        // Update current timer if needed
+        switch mode {
+        case .focus:
+            setTime(minutes: focusTime)
+        case .shortBreak:
+            setTime(minutes: shortBreakTime)
+        case .longBreak:
+            setTime(minutes: longBreakTime)
+        }
     }
     
     var progress: CGFloat {

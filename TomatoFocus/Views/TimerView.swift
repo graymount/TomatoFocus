@@ -1,9 +1,14 @@
 import SwiftUI
 
 struct TimerView: View {
-    @StateObject private var timerModel = TimerModel()
+    @ObservedObject var timerModel: TimerModel
     @State private var isImmersiveMode = false
     @ObservedObject private var audioManager = AudioManager.shared
+    
+    // Constructor with default for backward compatibility and previews
+    init(timerModel: TimerModel = TimerModel()) {
+        self.timerModel = timerModel
+    }
     
     var body: some View {
         ZStack {
@@ -177,16 +182,17 @@ struct TimerView: View {
                 
                 // Mode selection buttons
                 Menu {
-                    Button("专注 (25分钟)") { timerModel.setTime(minutes: 25); timerModel.mode = .focus }
-                    Button("短休息 (5分钟)") { timerModel.setTime(minutes: 5); timerModel.mode = .shortBreak }
-                    Button("长休息 (15分钟)") { timerModel.setTime(minutes: 15); timerModel.mode = .longBreak }
-                    
-                    Section("自定义") {
-                        ForEach([10, 15, 20, 30, 45, 60], id: \.self) { minutes in
-                            Button("\(minutes)分钟") {
-                                timerModel.setCustomTime(minutes: minutes)
-                            }
-                        }
+                    Button("专注模式") { 
+                        timerModel.mode = .focus
+                        timerModel.reset()
+                    }
+                    Button("短休息") { 
+                        timerModel.mode = .shortBreak 
+                        timerModel.reset()
+                    }
+                    Button("长休息") { 
+                        timerModel.mode = .longBreak
+                        timerModel.reset()
                     }
                 } label: {
                     Image(systemName: "clock")
@@ -285,45 +291,6 @@ struct TimerView: View {
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
-    }
-}
-
-// MARK: - Extensions
-
-extension TimerModel.TimerMode {
-    var title: String {
-        switch self {
-        case .focus: return "专注时间"
-        case .shortBreak: return "短休息"
-        case .longBreak: return "长休息"
-        }
-    }
-    
-    var description: String {
-        switch self {
-        case .focus: return "保持专注"
-        case .shortBreak: return "休息一下"
-        case .longBreak: return "享受长休息"
-        }
-    }
-    
-    var color: Color {
-        switch self {
-        case .focus: return Color.red
-        case .shortBreak: return Color.green
-        case .longBreak: return Color.blue
-        }
-    }
-    
-    var gradientColors: [Color] {
-        switch self {
-        case .focus:
-            return [Color(red: 0.9, green: 0.3, blue: 0.3), Color(red: 0.8, green: 0.1, blue: 0.1)]
-        case .shortBreak:
-            return [Color(red: 0.3, green: 0.8, blue: 0.4), Color(red: 0.1, green: 0.6, blue: 0.2)]
-        case .longBreak:
-            return [Color(red: 0.3, green: 0.5, blue: 0.9), Color(red: 0.1, green: 0.3, blue: 0.8)]
-        }
     }
 }
 
